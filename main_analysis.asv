@@ -1,0 +1,151 @@
+
+clc
+clearvars
+close all
+
+
+
+
+%% ------------------ User/session parameters --------------------------------------------
+% Basic metadata
+animal_list =  {'chip'};        % {'hans', 'chip'}
+area_list = {'LIP'};            % {'LIP', 'VIP', 'STS'}
+
+
+% Analysis tags
+force_extraction = 0;
+
+
+% % Sessions and neurons
+% n_sessions = numel(dataset);
+% n_neurons  = dataset(1).spike_channels_number;
+
+% Stimulus channels priority (try first, then fallback)
+stim_channels = [7, 4];
+
+% Conditions of interest and their spatial positions (deg)
+condition_list = [1:6, 13];
+n_conditions = numel(condition_list);
+stim_positions = [-25, -15, -5, +5, +15, +25];
+
+% Sampling rates [Hz]
+sr_eye = 500;    % eye sampling
+sr_neu = 1000;   % neural sampling (samples per second)
+
+% Binning and analysis window
+bin_size_ms = 10;           % bin width [ms]
+bin_size_samples = round(bin_size_ms * sr_neu / 1000); % [samples per bin]
+
+time_window = [-500, 500];  % analysis window relative to alignment [ms]
+time_vec    = time_window(1):bin_size_ms:time_window(2)-bin_size_ms; % bin edges [ms]
+n_bins      = numel(time_vec);
+
+% Stimulus alignment delay (applied only to 'stimulus' alignment)
+delay_ms      = 200;                                   % [ms]
+delay_samples = round(delay_ms * sr_neu / 1000);       % [samples]
+perisacc_thresh_ms = 200;                              % [ms]
+
+
+% Firing rate threshold for active neuron mask
+min_FR = 1;  % [Hz]
+
+% alignments to process
+alignments = {'saccade', 'stimulus', 'jump'};
+
+% --- Plotting parameters --------------------------------------------
+% Define the subplot mapping: condition ID -> subplot index (3x3 layout)
+subplot_map = containers.Map(...
+    {1, 2, 3, 4, 5, 6, 13}, ...
+    [1, 4, 7, 2, 5, 8, 6] ...
+);
+% [ cond 1 (-25°) | cond 4 (+5°)  |     EMPTY    ]
+% [ cond 2 (-15°) | cond 5 (+15°) |  cond 13 (no stim) ]
+% [ cond 3 (-5°)  | cond 6 (+25°) |   LEGEND     ]
+
+% Define a colormap for the conditions (7 conditions)
+colors = lines(length(keys(subplot_map))); 
+cond_keys = keys(subplot_map);
+
+color_spike = 'k';          % Spike
+color_stim  = 'g';          % Stimulus onset
+color_jump  = 'b';          % Target jump
+color_sacc  = 'r';          % Saccade onset
+size_tick = 0.4;            % Tick height for raster plot
+
+show_summary = true; % se false → nessuna stampa
+save_summary_to_file = true;
+summary_filename = 'pipeline_summary.txt';
+
+
+% plot_data = 0;                  % plot figures
+%     response_window = 200;          % in ms
+%     saccade_baseline_window = [-300,+200];
+%     saccade_response_window = [-200,+200];
+%     visual_window = [-200,+200];
+%     baseline_window = [-200,-100];
+%     stim_position = [-25:10:+25];   % in deg
+%     sacc_dist_threshold = 4;
+%     fr_threshold = 4.0;
+%     fr_max = 80;
+%     area_colors = [sscanf('1b9e77', '%2x%2x%2x'),...
+%         sscanf('d95f02', '%2x%2x%2x'),...
+%         sscanf('7570b3', '%2x%2x%2x'),...
+%         sscanf('e7298a', '%2x%2x%2x')]'/255;
+%     location_colors = [sscanf('440154', '%2x%2x%2x'),...
+%         sscanf('414487', '%2x%2x%2x'),...
+%         sscanf('2a788e', '%2x%2x%2x'),...
+%         sscanf('22a884', '%2x%2x%2x'),...
+%         sscanf('7ad151', '%2x%2x%2x'),...
+%         sscanf('fde725', '%2x%2x%2x')];
+
+% Brewer colormap
+area_colors = [sscanf('1b9e77', '%2x%2x%2x'),...
+    sscanf('d95f02', '%2x%2x%2x'),...
+    sscanf('7570b3', '%2x%2x%2x'),...
+    sscanf('e7298a', '%2x%2x%2x')]'/255;
+
+% Viridis colormap
+location_colors = [sscanf('440154', '%2x%2x%2x'),...
+    sscanf('414487', '%2x%2x%2x'),...
+    sscanf('2a788e', '%2x%2x%2x'),...
+    sscanf('22a884', '%2x%2x%2x'),...
+    sscanf('7ad151', '%2x%2x%2x'),...
+    sscanf('fde725', '%2x%2x%2x')]/255;
+
+
+
+
+
+%% STEP 1: data extraction
+fprintf('\n________________\nSTEP 1\nLoad datasets...\n');
+dataset_num = 0;
+dataset_name = cell(1,length(animal_list)*length(area_list));
+datasets = cell(1,length(animal_list)*length(area_list));
+
+for animal_num=1:length(animal_list)
+
+    for area_num=1:length(area_list)
+        dataset_num = dataset_num+1;
+        dataset_name{dataset_num} = sprintf('dataset_%s_%s.mat', animal_list{animal_num}, area_list{area_num});
+
+        if ~exist(['../', dataset_name{dataset_num}], 'file') || force_extraction
+            fprintf('Extracting data...\n');
+            dataset = extract_dataset(animal_list{animal_num}, area_list{area_num});
+            save(['../', dataset_name{dataset_num}], 'dataset', '-v7.3');
+            datasets{dataset_num} = dataset;
+            clear dataset
+        else
+            load(['../', dataset_name{dataset_num}]);
+        end
+
+    end 
+
+end
+fprintf('done\n');
+
+
+
+%% STEP 2: data extraction
+fprintf('\n________________\nSTEP 1\nLoad datasets...\n');
+
+
