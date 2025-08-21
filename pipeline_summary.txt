@@ -1,0 +1,195 @@
+
+== DATA SUMMARY ==
+saccade   | raw [20 2612 7 7 17] | win [20 100 7 7 17] | bin [20 100 7 7 17]
+stimulus  | raw [20 2612 7 7 17] | win [20 100 7 7 17] | bin [20 100 7 7 17]
+jump      | raw [20 2612 7 7 17] | win [20 100 7 7 17] | bin [20 100 7 7 17]
+
+== Percentage of valid bins ==
+saccade   |  82.9% valid
+stimulus  |  69.0% valid
+jump      |  82.9% valid
+
+== Firing rate (Hz) by condition ==
+saccade:
+  cond 1 | min 0.0, max 400.0, mean 3.2 Hz
+  cond 2 | min 0.0, max 500.0, mean 3.3 Hz
+  cond 3 | min 0.0, max 500.0, mean 3.3 Hz
+  cond 4 | min 0.0, max 500.0, mean 3.3 Hz
+  cond 5 | min 0.0, max 400.0, mean 3.2 Hz
+  cond 6 | min 0.0, max 500.0, mean 3.1 Hz
+  cond 13 | min 0.0, max 500.0, mean 2.8 Hz
+stimulus:
+  cond 1 | min 0.0, max 400.0, mean 3.2 Hz
+  cond 2 | min 0.0, max 400.0, mean 3.3 Hz
+  cond 3 | min 0.0, max 500.0, mean 3.3 Hz
+  cond 4 | min 0.0, max 500.0, mean 3.3 Hz
+  cond 5 | min 0.0, max 400.0, mean 3.2 Hz
+  cond 6 | min 0.0, max 500.0, mean 3.1 Hz
+  cond 13 | no data
+jump:
+  cond 1 | min 0.0, max 500.0, mean 3.2 Hz
+  cond 2 | min 0.0, max 400.0, mean 3.1 Hz
+  cond 3 | min 0.0, max 500.0, mean 3.1 Hz
+  cond 4 | min 0.0, max 400.0, mean 3.1 Hz
+  cond 5 | min 0.0, max 400.0, mean 3.0 Hz
+  cond 6 | min 0.0, max 500.0, mean 3.1 Hz
+  cond 13 | min 0.0, max 500.0, mean 2.7 Hz
+
+== Stimulus summary per condition ==
+Session 1:
+  cond 1 | trials: 15 | stim yes: 15 | stim no: 0
+  cond 2 | trials: 14 | stim yes: 14 | stim no: 0
+  cond 3 | trials: 14 | stim yes: 14 | stim no: 0
+  cond 4 | trials: 15 | stim yes: 15 | stim no: 0
+  cond 5 | trials: 14 | stim yes: 14 | stim no: 0
+  cond 6 | trials: 14 | stim yes: 14 | stim no: 0
+  cond 13 | trials: 15 | stim yes: 0 | stim no: 15
+Session 2:
+  cond 1 | trials: 10 | stim yes: 10 | stim no: 0
+  cond 2 | trials: 9 | stim yes: 9 | stim no: 0
+  cond 3 | trials: 10 | stim yes: 10 | stim no: 0
+  cond 4 | trials: 9 | stim yes: 9 | stim no: 0
+  cond 5 | trials: 9 | stim yes: 9 | stim no: 0
+  cond 6 | trials: 10 | stim yes: 10 | stim no: 0
+  cond 13 | trials: 10 | stim yes: 0 | stim no: 10
+Session 3:
+  cond 1 | trials: 9 | stim yes: 9 | stim no: 0
+  cond 2 | trials: 10 | stim yes: 10 | stim no: 0
+  cond 3 | trials: 10 | stim yes: 10 | stim no: 0
+  cond 4 | trials: 10 | stim yes: 10 | stim no: 0
+  cond 5 | trials: 9 | stim yes: 9 | stim no: 0
+  cond 6 | trials: 8 | stim yes: 8 | stim no: 0
+  cond 13 | trials: 10 | stim yes: 0 | stim no: 10
+Session 4:
+  cond 1 | trials: 13 | stim yes: 13 | stim no: 0
+  cond 2 | trials: 14 | stim yes: 14 | stim no: 0
+  cond 3 | trials: 15 | stim yes: 15 | stim no: 0
+  cond 4 | trials: 14 | stim yes: 14 | stim no: 0
+  cond 5 | trials: 14 | stim yes: 14 | stim no: 0
+  cond 6 | trials: 14 | stim yes: 14 | stim no: 0
+  cond 13 | trials: 15 | stim yes: 0 | stim no: 15
+Session 5:
+  cond 1 | trials: 17 | stim yes: 11 | stim no: 6
+  cond 2 | trials: 17 | stim yes: 10 | stim no: 7
+  cond 3 | trials: 18 | stim yes: 11 | stim no: 7
+  cond 4 | trials: 17 | stim yes: 11 | stim no: 6
+  cond 5 | trials: 17 | stim yes: 10 | stim no: 7
+  cond 6 | trials: 17 | stim yes: 12 | stim no: 5
+  cond 13 | trials: 17 | stim yes: 0 | stim no: 17
+Session 6:
+  cond 1 | trials: 3 | stim yes: 3 | stim no: 0
+  cond 2 | trials: 2 | stim yes: 2 | stim no: 0
+  cond 3 | trials: 2 | stim yes: 2 | stim no: 0
+  cond 4 | trials: 1 | stim yes: 0 | stim no: 1
+  cond 5 | trials: 2 | stim yes: 2 | stim no: 0
+  cond 6 | trials: 1 | stim yes: 1 | stim no: 0
+  cond 13 | trials: 2 | stim yes: 0 | stim no: 2
+Session 7:
+  cond 1 | trials: 20 | stim yes: 20 | stim no: 0
+  cond 2 | trials: 19 | stim yes: 19 | stim no: 0
+  cond 3 | trials: 20 | stim yes: 20 | stim no: 0
+  cond 4 | trials: 20 | stim yes: 20 | stim no: 0
+  cond 5 | trials: 19 | stim yes: 19 | stim no: 0
+  cond 6 | trials: 19 | stim yes: 19 | stim no: 0
+  cond 13 | trials: 19 | stim yes: 0 | stim no: 19
+Session 8:
+  cond 1 | trials: 20 | stim yes: 20 | stim no: 0
+  cond 2 | trials: 20 | stim yes: 20 | stim no: 0
+  cond 3 | trials: 20 | stim yes: 20 | stim no: 0
+  cond 4 | trials: 20 | stim yes: 20 | stim no: 0
+  cond 5 | trials: 20 | stim yes: 20 | stim no: 0
+  cond 6 | trials: 20 | stim yes: 20 | stim no: 0
+  cond 13 | trials: 20 | stim yes: 0 | stim no: 20
+Session 9:
+  cond 1 | trials: 17 | stim yes: 17 | stim no: 0
+  cond 2 | trials: 19 | stim yes: 19 | stim no: 0
+  cond 3 | trials: 18 | stim yes: 18 | stim no: 0
+  cond 4 | trials: 18 | stim yes: 18 | stim no: 0
+  cond 5 | trials: 18 | stim yes: 18 | stim no: 0
+  cond 6 | trials: 19 | stim yes: 19 | stim no: 0
+  cond 13 | trials: 19 | stim yes: 0 | stim no: 19
+Session 10:
+  cond 1 | trials: 20 | stim yes: 20 | stim no: 0
+  cond 2 | trials: 20 | stim yes: 20 | stim no: 0
+  cond 3 | trials: 20 | stim yes: 20 | stim no: 0
+  cond 4 | trials: 20 | stim yes: 20 | stim no: 0
+  cond 5 | trials: 20 | stim yes: 20 | stim no: 0
+  cond 6 | trials: 20 | stim yes: 20 | stim no: 0
+  cond 13 | trials: 20 | stim yes: 0 | stim no: 20
+Session 11:
+  cond 1 | trials: 20 | stim yes: 19 | stim no: 1
+  cond 2 | trials: 20 | stim yes: 20 | stim no: 0
+  cond 3 | trials: 20 | stim yes: 20 | stim no: 0
+  cond 4 | trials: 20 | stim yes: 20 | stim no: 0
+  cond 5 | trials: 20 | stim yes: 20 | stim no: 0
+  cond 6 | trials: 20 | stim yes: 20 | stim no: 0
+  cond 13 | trials: 20 | stim yes: 0 | stim no: 20
+Session 12:
+  cond 1 | trials: 20 | stim yes: 19 | stim no: 1
+  cond 2 | trials: 20 | stim yes: 20 | stim no: 0
+  cond 3 | trials: 20 | stim yes: 20 | stim no: 0
+  cond 4 | trials: 20 | stim yes: 20 | stim no: 0
+  cond 5 | trials: 20 | stim yes: 20 | stim no: 0
+  cond 6 | trials: 20 | stim yes: 20 | stim no: 0
+  cond 13 | trials: 20 | stim yes: 0 | stim no: 20
+Session 13:
+  cond 1 | trials: 20 | stim yes: 19 | stim no: 1
+  cond 2 | trials: 20 | stim yes: 20 | stim no: 0
+  cond 3 | trials: 20 | stim yes: 20 | stim no: 0
+  cond 4 | trials: 20 | stim yes: 20 | stim no: 0
+  cond 5 | trials: 20 | stim yes: 20 | stim no: 0
+  cond 6 | trials: 20 | stim yes: 20 | stim no: 0
+  cond 13 | trials: 20 | stim yes: 0 | stim no: 20
+Session 14:
+  cond 1 | trials: 20 | stim yes: 20 | stim no: 0
+  cond 2 | trials: 19 | stim yes: 19 | stim no: 0
+  cond 3 | trials: 20 | stim yes: 20 | stim no: 0
+  cond 4 | trials: 20 | stim yes: 19 | stim no: 1
+  cond 5 | trials: 20 | stim yes: 20 | stim no: 0
+  cond 6 | trials: 20 | stim yes: 20 | stim no: 0
+  cond 13 | trials: 20 | stim yes: 0 | stim no: 20
+Session 15:
+  cond 1 | trials: 17 | stim yes: 17 | stim no: 0
+  cond 2 | trials: 18 | stim yes: 18 | stim no: 0
+  cond 3 | trials: 18 | stim yes: 18 | stim no: 0
+  cond 4 | trials: 18 | stim yes: 18 | stim no: 0
+  cond 5 | trials: 17 | stim yes: 16 | stim no: 1
+  cond 6 | trials: 17 | stim yes: 17 | stim no: 0
+  cond 13 | trials: 18 | stim yes: 0 | stim no: 18
+Session 16:
+  cond 1 | trials: 20 | stim yes: 20 | stim no: 0
+  cond 2 | trials: 20 | stim yes: 20 | stim no: 0
+  cond 3 | trials: 20 | stim yes: 20 | stim no: 0
+  cond 4 | trials: 20 | stim yes: 20 | stim no: 0
+  cond 5 | trials: 20 | stim yes: 20 | stim no: 0
+  cond 6 | trials: 20 | stim yes: 20 | stim no: 0
+  cond 13 | trials: 20 | stim yes: 0 | stim no: 20
+Session 17:
+  cond 1 | trials: 20 | stim yes: 19 | stim no: 1
+  cond 2 | trials: 20 | stim yes: 20 | stim no: 0
+  cond 3 | trials: 20 | stim yes: 20 | stim no: 0
+  cond 4 | trials: 20 | stim yes: 20 | stim no: 0
+  cond 5 | trials: 20 | stim yes: 20 | stim no: 0
+  cond 6 | trials: 20 | stim yes: 20 | stim no: 0
+  cond 13 | trials: 20 | stim yes: 0 | stim no: 20
+
+== Stimulus channel usage (compact) ==
+Session | Ch7    Ch4    NoStim
+--------+------------------------
+   1    |    0    170     17
+   2    |    0    117     10
+   3    |    0    114     10
+   4    |    0    168     15
+   5    |  132      0     90
+   6    |   17      0      3
+   7    |  230      0     20
+   8    |  240      0     20
+   9    |  215      0     21
+  10    |  241      0     20
+  11    |  237      0     22
+  12    |  238      0     22
+  13    |  237      0     23
+  14    |  236      0     22
+  15    |  211      0     19
+  16    |  239      0     20
+  17    |  236      0     23
