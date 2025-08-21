@@ -7,7 +7,14 @@
 % - dataset: structure containing various fields, see readme for description
 
 
-function dataset = localization_extract_data(monkey, area)
+function dataset = localization_extract_data(monkey, area, settings)
+    
+    arguments
+       monkey {mustBeText}
+       area {mustBeText}
+       settings struct
+%        settings.spikes_filter_width (1,1) {mustBePositive} = 5
+    end
 
     if strcmp(monkey, 'hans')
         monkey_folder = 'RawDataHans';
@@ -100,12 +107,10 @@ function dataset = localization_extract_data(monkey, area)
         
         
         % Filter data
-        filter_std = 5;
+        filter_std = settings.spikes_filter_width;
         kernel = normpdf(-5*filter_std:+5*filter_std, 0, filter_std);
-%         kernel = [zeros(1,10*filter_std),exp(-(0:+10*filter_std)./filter_std)];
-%         kernel = kernel./sum(kernel);
         for cc=1:7
-            tmpsession.spike_data_filtered(:,:,cc) = conv2(tmpsession.spike_data(:,:,cc), kernel, 'same');
+            tmpsession.spike_data_filtered(:,:,cc) = settings.sr_neu * conv2(tmpsession.spike_data(:,:,cc), kernel, 'same');
         end
 
         dataset(ses) = tmpsession;
