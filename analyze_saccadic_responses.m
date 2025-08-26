@@ -192,9 +192,9 @@ function [dataset,collapsed] = analyze_saccadic_responses(dataset, collapsed, se
 
 
     %% Check valid cells
-    n_sessions = size(collapsed.peri_saccadic_mat,3);
-    n_channels = size(collapsed.peri_saccadic_mat,2);
-    n_trials = size(collapsed.peri_saccadic_mat,1);
+    n_sessions = size(collapsed.peri.stim_sac_diff_mat,3);
+    n_channels = size(collapsed.peri.stim_sac_diff_mat,2);
+    n_trials = size(collapsed.peri.stim_sac_diff_mat,1);
     
     mean_fr = NaN(n_channels, n_sessions);
     valid_cells_mat = zeros(n_channels, n_sessions);
@@ -203,7 +203,7 @@ function [dataset,collapsed] = analyze_saccadic_responses(dataset, collapsed, se
     for ss=1:n_sessions
         for cc=1:n_channels
             
-            mean_fr(cc,ss) = 1000*mean(collapsed.spike_data_raw.saccade(:,:,:,cc,ss),'all','omitnan');  % mean across trials, time and condition
+            mean_fr(cc,ss) = 1000*mean(collapsed.peri.spike_data_raw.saccade(:,:,:,cc,ss),'all','omitnan');  % mean across trials, time and condition
             valid_cells_mat(cc,ss) = mean_fr(cc,ss)>settings.min_FR;                                    % if it is higher than threshold
             valid_cells_count = valid_cells_count+1;
 
@@ -240,14 +240,15 @@ function [dataset,collapsed] = analyze_saccadic_responses(dataset, collapsed, se
                 figure(fh_saccadeactivity(curr_fig))
                 subplot(settings.plot.n_rows,settings.plot.n_cols,curr_ind)
 
-                plot(settings.time_vec, 1000*mean(collapsed.spike_data_filtered.saccade(:,:,7,cc,ss),1,'omitnan'));
+                plot(settings.time_vec, mean(collapsed.sac.spike_data_filtered.saccade(:,:,1,cc,ss),1,'omitnan'));
+                axis([-500,+500,0,200])
 
                 % Baseline is relative to target jump
-                baseline_fr(cc,ss) = 1000*mean(collapsed.spike_data_raw.jump(:,(settings.time_vec>=settings.baseline_window(1))&(settings.time_vec<=settings.baseline_window(2)),7,cc,ss),'all','omitnan');
+                baseline_fr(cc,ss) = 1000*mean(collapsed.sac.spike_data_raw.jump(:,(settings.time_vec>=settings.baseline_window(1))&(settings.time_vec<=settings.baseline_window(2)),1,cc,ss),'all','omitnan');
                 % Rest relative to saccade
-                presaccade_fr(cc,ss) = 1000*mean(collapsed.spike_data_raw.saccade(:,(settings.time_vec>=settings.pre_saccadic_window(1))&(settings.time_vec<=settings.pre_saccadic_window(2)),7,cc,ss),'all','omitnan');
-                saccade_fr(cc,ss) = 1000*mean(collapsed.spike_data_raw.saccade(:,(settings.time_vec>=settings.saccadic_window(1))&(settings.time_vec<=settings.saccadic_window(2)),7,cc,ss),'all','omitnan');
-                postsaccade_fr(cc,ss) = 1000*mean(collapsed.spike_data_raw.saccade(:,(settings.time_vec>=settings.post_saccadic_window(1))&(settings.time_vec<=settings.post_saccadic_window(2)),7,cc,ss),'all','omitnan');
+                presaccade_fr(cc,ss) = 1000*mean(collapsed.sac.spike_data_raw.saccade(:,(settings.time_vec>=settings.pre_saccadic_window(1))&(settings.time_vec<=settings.pre_saccadic_window(2)),1,cc,ss),'all','omitnan');
+                saccade_fr(cc,ss) = 1000*mean(collapsed.sac.spike_data_raw.saccade(:,(settings.time_vec>=settings.saccadic_window(1))&(settings.time_vec<=settings.saccadic_window(2)),1,cc,ss),'all','omitnan');
+                postsaccade_fr(cc,ss) = 1000*mean(collapsed.sac.spike_data_raw.saccade(:,(settings.time_vec>=settings.post_saccadic_window(1))&(settings.time_vec<=settings.post_saccadic_window(2)),1,cc,ss),'all','omitnan');
 
             end
         end

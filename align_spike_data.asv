@@ -42,7 +42,7 @@ function [dataset,collapsed] = align_spike_data(dataset, settings)
     %% --- 0) Trial indices and sizes -----------------------------------------
     
     % Compute trial indices per (condition, session), and max per cell
-    [trial_idx_peri, trials_num_peri, trial_idx_trans, trials_num_trans, trial_idx_sac, trials_num_sac] = ...
+    [trial_idx_peri, trials_num_peri, trial_idx_trans, trials_num_trans, trial_idx_peri, trials_num_peri] = ...
         compute_trial_indices(dataset, settings);
     
     % Global maximum trials across all (cond x session) to preallocate [trial] dim in the 5D matrices 
@@ -71,22 +71,28 @@ function [dataset,collapsed] = align_spike_data(dataset, settings)
     % - spike_data_win.(align): counts per bin (time dimension = bins)
     % - spike_data_binned.(align): firing rate (Hz), same shape as counts
     % - spike_data_valid.(align): boolean mask for valid bins
+%     spike_data_raw    = struct();
+%     spike_data_win    = struct();
+%     spike_data_binned = struct();
+%     spike_data_valid  = struct();
     spike_data_peri_raw    = struct();
     spike_data_peri_filtered = struct();
     spike_data_trans_raw    = struct();
     spike_data_trans_filtered = struct();
     spike_data_sac_raw    = struct();
     spike_data_sac_filtered = struct();
-        
+    
+%     peri_saccadic_mat =  NaN(max_trial_cond, n_conditions, n_sessions);
+    
     for align_num = 1:numel(alignments)
         align_name = alignments{align_num};
 
         spike_data_peri_raw.(align_name)      =  NaN(max_trial_peri, settings.n_bins, n_conditions_peri, n_neurons, n_sessions);
         spike_data_peri_filtered.(align_name) =  NaN(max_trial_peri, settings.n_bins, n_conditions_peri, n_neurons, n_sessions);
-        spike_data_trans_raw.(align_name)      =  NaN(max_trial_trans, settings.n_bins, n_conditions_trans, n_neurons, n_sessions);
-        spike_data_trans_filtered.(align_name) =  NaN(max_trial_trans, settings.n_bins, n_conditions_trans, n_neurons, n_sessions);
-        spike_data_sac_raw.(align_name)      =  NaN(max_trial_sac, settings.n_bins, n_conditions_sac, n_neurons, n_sessions);
-        spike_data_sac_filtered.(align_name) =  NaN(max_trial_sac, settings.n_bins, n_conditions_sac, n_neurons, n_sessions);
+        spike_data_trans_raw.(align_name)      =  NaN(max_trial_peri, settings.n_bins, n_conditions_trans, n_neurons, n_sessions);
+        spike_data_trans_filtered.(align_name) =  NaN(max_trial_peri, settings.n_bins, n_conditions_trans, n_neurons, n_sessions);
+        spike_data_sac_raw.(align_name)      =  NaN(max_trial_peri, settings.n_bins, n_conditions_sac, n_neurons, n_sessions);
+        spike_data_sac_filtered.(align_name) =  NaN(max_trial_peri, settings.n_bins, n_conditions_sac, n_neurons, n_sessions);
     end
     
     
@@ -335,9 +341,8 @@ function [dataset,collapsed] = align_spike_data(dataset, settings)
                     onset_samples = NaN;
                     
                     % Get stimulus onset
-%                     stim_onset_ms = session_dataset.triggers.measured_triggers(tmp_trial_idx,1);
-                    stim_onset_ms = session_dataset.events_time(tmp_trial_idx,2);
-
+                    stim_onset_ms = session_dataset.triggers.measured_triggers(tmp_trial_idx,1);
+                    
                     % Get saccade onset
                     saccade_onset_ms = session_dataset.saccade.saccade_onsets(tmp_trial_idx);
 
@@ -403,8 +408,8 @@ function [dataset,collapsed] = align_spike_data(dataset, settings)
     end % sessions
     
     collapsed.sac.stim_sac_diff_mat = stim_sac_diff_mat;
-    collapsed.sac.spike_data_raw = spike_data_sac_raw;
-    collapsed.sac.spike_data_filtered = spike_data_sac_filtered;
+    collapsed.sac.spike_data_raw = spike_data_trans_raw;
+    collapsed.sac.spike_data_filtered = spike_data_trans_filtered;
 
 end
 
