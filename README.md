@@ -9,7 +9,7 @@ git push -u origin $name
 ```
 
 2. To get the latest version of the shared repository: `git pull origin main`. 
-While on your own branch, this will actually pull the origin repository to your own branch (confusingly, not to the main branch).
+While on your own branch, this will actually pull the origin repository to your own branch (confusingly, not to the main branch). If there are are uncommitted changes, an error message will be displayed. First commit changes with `git commit -m "commit message"`, then pull the repository.
 
 3. After significant changes to your own branch, push it to origin:
 ```

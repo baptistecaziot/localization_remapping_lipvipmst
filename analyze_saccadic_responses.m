@@ -215,7 +215,7 @@ function [dataset,collapsed] = analyze_saccadic_responses(dataset, collapsed, se
     collapsed.mean_fr = mean_fr;
     collapsed.valid_cells_mat = valid_cells_mat;
     
-
+    
     %% Compute saccade-related activity, baseline etc.
     baseline_fr = NaN(n_channels, n_sessions);
     presaccade_fr = NaN(n_channels, n_sessions);
