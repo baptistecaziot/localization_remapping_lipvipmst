@@ -30,14 +30,19 @@ settings.eyetracking.saccade_window_max = +200;
 settings.eyetracking.position_window_ms = 50;
 
 % Stimulus channels priority (try first, then fallback)
-settings.stim_channels = [7, 4];
+settings.trigger_channels = [7, 4];
+settings.events_delay_ms = 200;
 settings.min_triggers_delay_ms = 500;
+settings.max_triggers_delay_ms = 2000;
 
 % Spikes parameters
  settings.spikes_filter_width = 10;
 
 % Conditions of interest and their spatial positions (deg)
-settings.condition_list = [1:6, 13];
+% settings.condition_list = [1:6, 13];
+settings.conditions_perisaccadic = 1:6;
+settings.conditions_transsaccadic = 7:12;
+settings.conditions_saccade = 13;
 settings.stim_positions = [-25, -15, -5, +5, +15, +25];
 
 % Binning and analysis window
@@ -52,12 +57,6 @@ settings.baseline_window = [-100,-50];
 settings.pre_saccadic_window = [-75,-25];
 settings.saccadic_window = [-25,+25];
 settings.post_saccadic_window = [+25,+75];
-
-
-% Stimulus alignment delay (applied only to 'stimulus' alignment)
-settings.delay_ms      = 200;                                   % [ms]
-settings.delay_samples = round(settings.delay_ms * settings.sr_neu / 1000);       % [samples]
-settings.perisacc_thresh_ms = 200;                              % [ms]
 
 % Firing rate threshold for active neuron mask
 settings.min_FR = 3;  % [Hz]
