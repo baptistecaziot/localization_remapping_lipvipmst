@@ -242,13 +242,13 @@ function [dataset,collapsed] = analyze_saccadic_responses(dataset, collapsed, se
 
                 plot(settings.time_vec, mean(collapsed.sac.spike_data_filtered.saccade(:,:,1,cc,ss),1,'omitnan'));
                 axis([-500,+500,0,200])
-
+                
                 % Baseline is relative to target jump
-                baseline_fr(cc,ss) = 1000*mean(collapsed.sac.spike_data_raw.jump(:,(settings.time_vec>=settings.baseline_window(1))&(settings.time_vec<=settings.baseline_window(2)),1,cc,ss),'all','omitnan');
+                baseline_fr(cc,ss) = 1000*mean(collapsed.sac.spike_data_raw.jump(:,(settings.time_vec>=settings.sra.baseline_window(1))&(settings.time_vec<=settings.sra.baseline_window(2)),1,cc,ss),'all','omitnan');
                 % Rest relative to saccade
-                presaccade_fr(cc,ss) = 1000*mean(collapsed.sac.spike_data_raw.saccade(:,(settings.time_vec>=settings.pre_saccadic_window(1))&(settings.time_vec<=settings.pre_saccadic_window(2)),1,cc,ss),'all','omitnan');
-                saccade_fr(cc,ss) = 1000*mean(collapsed.sac.spike_data_raw.saccade(:,(settings.time_vec>=settings.saccadic_window(1))&(settings.time_vec<=settings.saccadic_window(2)),1,cc,ss),'all','omitnan');
-                postsaccade_fr(cc,ss) = 1000*mean(collapsed.sac.spike_data_raw.saccade(:,(settings.time_vec>=settings.post_saccadic_window(1))&(settings.time_vec<=settings.post_saccadic_window(2)),1,cc,ss),'all','omitnan');
+                presaccade_fr(cc,ss) = 1000*mean(collapsed.sac.spike_data_raw.saccade(:,(settings.time_vec>=settings.sra.pre_saccadic_window(1))&(settings.time_vec<=settings.sra.pre_saccadic_window(2)),1,cc,ss),'all','omitnan');
+                saccade_fr(cc,ss) = 1000*mean(collapsed.sac.spike_data_raw.saccade(:,(settings.time_vec>=settings.sra.saccadic_window(1))&(settings.time_vec<=settings.sra.saccadic_window(2)),1,cc,ss),'all','omitnan');
+                postsaccade_fr(cc,ss) = 1000*mean(collapsed.sac.spike_data_raw.saccade(:,(settings.time_vec>=settings.sra.post_saccadic_window(1))&(settings.time_vec<=settings.sra.post_saccadic_window(2)),1,cc,ss),'all','omitnan');
 
             end
         end
@@ -256,34 +256,37 @@ function [dataset,collapsed] = analyze_saccadic_responses(dataset, collapsed, se
 
     figure('Name','Windowed FR')
     subplot(2,3,1)
-    plot([0,settings.fr_max],[0,settings.fr_max],'k--',...
+    plot([0,settings.sra.fr_max],[0,settings.sra.fr_max],'k--',...
         baseline_fr,saccade_fr,'ko')
-    axis([0,settings.fr_max,0,settings.fr_max])
+    axis([0,settings.sra.fr_max,0,settings.sra.fr_max])
     xlabel('Baseline (Hz)')
     ylabel('Saccade (Hz)')
 
     subplot(2,3,2)
-    plot([0,settings.fr_max],[0,settings.fr_max],'k--',...
+    plot([0,settings.sra.fr_max],[0,settings.sra.fr_max],'k--',...
         saccade_fr,presaccade_fr,'ko')
-    axis([0,settings.fr_max,0,settings.fr_max])
+    axis([0,settings.sra.fr_max,0,settings.sra.fr_max])
     xlabel('Saccade (Hz)')
     ylabel('Pre-saccadic (Hz)')
 
     subplot(2,3,3)
-    plot([0,settings.fr_max],[0,settings.fr_max],'k--',...
+    plot([0,settings.sra.fr_max],[0,settings.sra.fr_max],'k--',...
         saccade_fr,postsaccade_fr,'ko')
-    axis([0,settings.fr_max,0,settings.fr_max])
+    axis([0,settings.sra.fr_max,0,settings.sra.fr_max])
     xlabel('Saccade (Hz)')
     ylabel('Post-saccadic (Hz)')
 
     subplot(2,3,4)
-    hist(saccade_fr(:)-baseline_fr(:));
+    hist(saccade_fr(:)-baseline_fr(:), settings.sra.hist_bins);
+    xlabel('FR saccade-baseline')
 
     subplot(2,3,5)
-    hist(presaccade_fr(:)-saccade_fr(:));
+    hist(presaccade_fr(:)-saccade_fr(:), settings.sra.hist_bins);
+    xlabel('FR presaccade-saccade')
 
     subplot(2,3,6)
-    hist(postsaccade_fr(:)-saccade_fr(:));
+    hist(postsaccade_fr(:)-saccade_fr(:), settings.sra.hist_bins);
+    xlabel('FR postsaccade-saccade')
 
     collapsed.baseline_fr = baseline_fr;
     collapsed.presaccade_fr = presaccade_fr;
