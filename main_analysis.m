@@ -53,18 +53,22 @@ settings.stim_positions = [-25, -15, -5, +5, +15, +25];
 settings.time_window    = [-500, 500];     % analysis window relative to alignment [ms]
 settings.n_bins         = settings.time_window(2)-settings.time_window(1);
 settings.time_vec       = settings.time_window(1):settings.time_window(2)-1; % bin edges [ms]
-settings.baseline_window = [-100,-50];
-settings.pre_saccadic_window = [-75,-25];
-settings.saccadic_window = [-25,+25];
-settings.post_saccadic_window = [+25,+75];
 
 % Firing rate threshold for active neuron mask
 settings.min_FR = 3;  % [Hz]
 
+% Saccade-related activity settings
+settings.sra.baseline_window = [-100,-50];
+settings.sra.pre_saccadic_window = [-75,-25];
+settings.sra.saccadic_window = [-25,+25];
+settings.sra.post_saccadic_window = [+25,+75];
+settings.sra.fr_max = 80;
+settings.sra.hist_bins = linspace(-50,+50,41);
+
 % Plotting options
 settings.plot.n_rows = 4;
 settings.plot.n_cols = 4;
-settings.fr_max = 80;
+
 
 % show_summary = true; % se false → nessuna stampa
 % save_summary_to_file = true;
@@ -144,8 +148,8 @@ fprintf('done\n');
 
 
 
-%% STEP 2: ???
-fprintf('\n________________\nSTEP 2\n???\n');
+%% STEP 2: Align datasets
+fprintf('\n________________\nSTEP 2\nAlign datasets\n');
 dataset_num = 0;
 % dataset_name = cell(1, length(animal_list)*length(area_list));
 % datasets = cell(1, length(animal_list)*length(area_list));
@@ -165,8 +169,8 @@ fprintf('done\n');
 
 
 
-%% STEP 3: ???
-fprintf('\n________________\nSTEP 3\n???\n');
+%% STEP 3: Compute saccade-related activity
+fprintf('\n________________\nSTEP 3\nCompute saccade-related activity\n');
 
 for animal_num=1:length(animal_list)
 
@@ -175,3 +179,16 @@ for animal_num=1:length(animal_list)
     end
 
 end
+
+
+%% STEP 4: Compute peri-saccadic responses
+fprintf('\n________________\nSTEP 4\nCompute peri-saccadic responses\n');
+
+for animal_num=1:length(animal_list)
+
+    for area_num=1:length(area_list)
+        [datasets{dataset_num},collapsed{dataset_num}] = compute_peri_visual_response(datasets{dataset_num}, collapsed{dataset_num}, settings);
+    end
+
+end
+

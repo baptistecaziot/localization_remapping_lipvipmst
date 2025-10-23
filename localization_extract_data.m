@@ -41,6 +41,9 @@ function dataset = localization_extract_data(monkey, area, settings)
 
     data_path = ['../RFUp_Parietal_Compressed/', monkey_folder, '/', area_folder];
     sessions_list = dir([data_path,'/*.',extension,'d']);
+    if isempty(sessions_list)
+        error('Could not find data in folder %s', data_path);
+    end
 
     fprintf('Found %i recording sessions\n', length(sessions_list))
     fprintf('Extracting data .. %03i%%', 0);
